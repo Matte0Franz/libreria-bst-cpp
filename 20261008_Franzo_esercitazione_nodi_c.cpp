@@ -11,6 +11,7 @@ struct Nodo {
         rchild = nullptr;
     }
 };
+
 Nodo* inserisci(Nodo* root, int val) {
     if (root == nullptr) {
         return new Nodo(val);
@@ -35,11 +36,37 @@ Nodo* inserisci(Nodo* root, int val) {
     }
     return root;
 }
+
+// Cerca un valore nel BST senza modificare l'albero.
+bool search(Nodo* root, int val) {
+    Nodo* current = root;
+
+    while (current != nullptr) {
+        if (val == current->data) {
+            return true;
+        } else if (val < current->data) {
+            current = current->lchild;
+        } else {
+            current = current->rchild;
+        }
+    }
+
+    return false;
+}
+
 int main() {
     Nodo* root = new Nodo(2);
     root = inserisci(root, 5);
     root = inserisci(root, 3);
     root = inserisci(root, 7);
     root = inserisci(root, 3); // doppione: non modifica l'albero
+
+    int valoreDaCercare = 3;
+    if (search(root, valoreDaCercare)) {
+        cout << "Valore trovato." << endl;
+    } else {
+        cout << "Valore non trovato." << endl;
+    }
+
     return 0;
 }
