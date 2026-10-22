@@ -3,8 +3,8 @@ using namespace std;
 
 struct Node {
     int data;
-    Nodo* lchild;
-    Nodo* rchild;
+    Node* lchild;
+    Node* rchild;
     Node(int k) {
         data = k;
         lchild = nullptr;
@@ -28,10 +28,10 @@ Node* insert(Node* root, int k) {
             return root;
         }
     }
-    if (val < dad->data) {
-        dad->lchild = new Nodo(k);
+    if (k < dad->data) {
+        dad->lchild = new Node(k);
     } else {
-        dad->rchild = new Nodo(k);
+        dad->rchild = new Node(k);
     }
     return root;
 }
