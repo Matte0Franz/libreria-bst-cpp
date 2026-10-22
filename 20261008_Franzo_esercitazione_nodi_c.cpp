@@ -1,27 +1,27 @@
 #include <iostream>
 using namespace std;
 
-struct Nodo {
+struct Node {
     int data;
     Nodo* lchild;
     Nodo* rchild;
-    Nodo(int val) {
-        data = val;
+    Node(int k) {
+        data = k;
         lchild = nullptr;
         rchild = nullptr;
     }
 };
-Nodo* inserisci(Nodo* root, int val) {
+Node* insert(Node* root, int k) {
     if (root == nullptr) {
-        return new Nodo(val);
+        return new Node(k);
     }
-    Nodo* current = root;
-    Nodo* dad = nullptr;
+    Node* current = root;
+    Node* dad = nullptr;
     while (current != nullptr) {
         dad = current;
-        if (val < current->data) {
+        if (k < current->data) {
             current = current->lchild;
-        } else if (val > current->data) {
+        } else if (k > current->data) {
             current = current->rchild;
         } else {
             // Il valore esiste già: l'albero rimane invariato.
@@ -29,17 +29,17 @@ Nodo* inserisci(Nodo* root, int val) {
         }
     }
     if (val < dad->data) {
-        dad->lchild = new Nodo(val);
+        dad->lchild = new Nodo(k);
     } else {
-        dad->rchild = new Nodo(val);
+        dad->rchild = new Nodo(k);
     }
     return root;
 }
 int main() {
-    Nodo* root = new Nodo(2);
-    root = inserisci(root, 5);
-    root = inserisci(root, 3);
-    root = inserisci(root, 7);
-    root = inserisci(root, 3); // doppione: non modifica l'albero
+    Node* root = new Node(2);
+    root = insert(root, 5);
+    root = insert(root, 3);
+    root = insert(root, 7);
+    root = insert(root, 3); // doppione: non modifica l'albero
     return 0;
 }
