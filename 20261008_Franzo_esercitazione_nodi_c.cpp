@@ -1,50 +1,50 @@
 #include <iostream>
 using namespace std;
 
-struct Nodo {
+struct Node {
     int data;
-    Nodo* lchild;
-    Nodo* rchild;
-    Nodo(int val) {
-        data = val;
+    Node* lchild;
+    Node* rchild;
+    Node(int k) {
+        data = k;
         lchild = nullptr;
         rchild = nullptr;
     }
 };
 
-Nodo* inserisci(Nodo* root, int val) {
+Node* insert(Node* root, int k) {
     if (root == nullptr) {
-        return new Nodo(val);
+        return new Node(k);
     }
-    Nodo* current = root;
-    Nodo* dad = nullptr;
+    Node* current = root;
+    Node* dad = nullptr;
     while (current != nullptr) {
         dad = current;
-        if (val < current->data) {
+        if (k < current->data) {
             current = current->lchild;
-        } else if (val > current->data) {
+        } else if (k > current->data) {
             current = current->rchild;
         } else {
             // Il valore esiste già: l'albero rimane invariato.
             return root;
         }
     }
-    if (val < dad->data) {
-        dad->lchild = new Nodo(val);
+    if (k < dad->data) {
+        dad->lchild = new Node(k);
     } else {
-        dad->rchild = new Nodo(val);
+        dad->rchild = new Node(k);
     }
     return root;
 }
 
 // Cerca un valore nel BST senza modificare l'albero.
-bool search(Nodo* root, int val) {
-    Nodo* current = root;
+bool search(Node* root, int k) {
+    Node* current = root;
 
     while (current != nullptr) {
-        if (val == current->data) {
+        if (k == current->data) {
             return true;
-        } else if (val < current->data) {
+        } else if (k < current->data) {
             current = current->lchild;
         } else {
             current = current->rchild;
@@ -55,11 +55,11 @@ bool search(Nodo* root, int val) {
 }
 
 int main() {
-    Nodo* root = new Nodo(2);
-    root = inserisci(root, 5);
-    root = inserisci(root, 3);
-    root = inserisci(root, 7);
-    root = inserisci(root, 3); // doppione: non modifica l'albero
+    Node* root = new Node(2);
+    root = insert(root, 5);
+    root = insert(root, 3);
+    root = insert(root, 7);
+    root = insert(root, 3); // doppione: non modifica l'albero
 
     int valoreDaCercare = 3;
     if (search(root, valoreDaCercare)) {
