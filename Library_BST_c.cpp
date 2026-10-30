@@ -1,31 +1,25 @@
 #include <algorithm>
 #include <iostream>
-
 using namespace std;
 
 struct Node {
     int data;
     Node* lchild;
     Node* rchild;
-
     Node(int k) {
         data = k;
         lchild = nullptr;
         rchild = nullptr;
     }
 };
-
 Node* insert(Node* root, int k) {
     if (root == nullptr) {
         return new Node(k);
     }
-
     Node* current = root;
     Node* dad = nullptr;
-
     while (current != nullptr) {
         dad = current;
-
         if (k < current->data) {
             current = current->lchild;
         } else if (k > current->data) {
@@ -35,13 +29,11 @@ Node* insert(Node* root, int k) {
             return root;
         }
     }
-
     if (k < dad->data) {
         dad->lchild = new Node(k);
     } else {
         dad->rchild = new Node(k);
     }
-
     return root;
 }
 
